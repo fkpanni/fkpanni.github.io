@@ -1,153 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume - Fahd Khan</title>
-    
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fahd Khan // Portfolio Boot</title>
+  <meta name="description" content="Fahd Khan developer portfolio launch page." />
+
+  <style>
+    :root {
+      --bg: #050607;
+      --panel: rgba(13, 17, 18, 0.92);
+      --text: #e8fff1;
+      --muted: #7c8f86;
+      --green: #72ff9f;
+      --green-soft: rgba(114, 255, 159, 0.18);
+      --border: rgba(114, 255, 159, 0.25);
+      --danger: #ff6b6b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Times New Roman', serif;
-      line-height: 1.5;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(114, 255, 159, 0.08), transparent 28%),
+        radial-gradient(circle at 80% 70%, rgba(114, 255, 159, 0.05), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .shell {
+      width: min(900px, 100%);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow:
+        0 0 40px rgba(114, 255, 159, 0.08),
+        inset 0 0 30px rgba(114, 255, 159, 0.03);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(114, 255, 159, 0.15);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--muted);
+      opacity: 0.8;
+    }
+
+    .dot:nth-child(1) { background: #ff5f56; }
+    .dot:nth-child(2) { background: #ffbd2e; }
+    .dot:nth-child(3) { background: #27c93f; }
+
+    .title {
+      margin-left: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    main {
+      padding: clamp(22px, 4vw, 44px);
+    }
+
+    .identity {
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      color: var(--green);
+      font-size: 14px;
+      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 5px;
+      margin: 0;
+      font-size: clamp(34px, 7vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
     }
 
-    h2 {
-      font-size: 20px;
-      font-weight: bold;
-      border-bottom: 1px solid #000;
-      padding-bottom: 3px;
-      margin-top: 15px;
+    .subtitle {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 650px;
+      line-height: 1.6;
     }
 
-    p {
-      font-size: 16px;
-      margin: 5px 0;
+    .terminal {
+      margin-top: 30px;
+      padding: 22px;
+      border: 1px solid rgba(114, 255, 159, 0.18);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.32);
+      min-height: 250px;
     }
 
-    ul {
-      margin: 5px 0;
-      padding-left: 20px;
+    .line {
+      min-height: 24px;
+      line-height: 1.6;
+      color: var(--text);
+      word-break: break-word;
     }
 
-    li {
-      margin-bottom: 5px;
+    .prompt {
+      color: var(--green);
     }
 
-    .contact-info {
-      text-align: center;
-      margin-bottom: 15px;
+    .muted {
+      color: var(--muted);
     }
 
-    .section {
-      margin-bottom: 15px;
+    .ok {
+      color: var(--green);
     }
 
-    .job-title {
-      font-weight: bold;
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.1em;
+      background: var(--green);
+      transform: translateY(3px);
+      animation: blink 1s steps(1) infinite;
+      margin-left: 3px;
     }
 
-    .job-date {
-      float: right;
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
-    .job-company {
-      font-style: italic;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+      align-items: center;
+    }
+
+    button,
+    a.button {
+      border: 1px solid var(--border);
+      background: var(--green-soft);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    button:hover,
+    a.button:hover {
+      transform: translateY(-1px);
+      border-color: var(--green);
+      background: rgba(114, 255, 159, 0.24);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(114, 255, 159, 0.12);
+      padding-top: 18px;
+    }
+
+    .footer a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 12px;
+      }
+
+      main {
+        padding: 22px;
+      }
+
+      .terminal {
+        padding: 16px;
+      }
+
+      .actions {
+        align-items: stretch;
+      }
+
+      button,
+      a.button {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
+
 <body>
-    
-    <h1 class="contact-info">FAHD KHAN</h1>
-    <p class="contact-info">Chicago, IL | 773-977-5422 | fkpani0@gmail.com | www.linkedin.com/in/fkpanni/</p>
-
-    <div class="section">
-      <h2>SUMMARY</h2>
-      <p>Disciplined Computer science student pursuing a Bachelor's in CS and a Master's in Cybersecurity with a passion for game development, ethical hacking, and digital marketing. Experienced in designing and scripting games using Lua and C++, developing secure applications, and conducting penetration testing. Skilled in Python, SQL, and Java, with a strong foundation in software development, automation, and cybersecurity. Adept at leveraging marketing strategies and data-driven insights to enhance engagement and brand presence.</p>
+  <section class="shell" aria-label="Portfolio launch terminal">
+    <div class="topbar">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="title">fahd@github-pages: ~/portfolio-launch</span>
     </div>
 
-    <div class="section">
-      <h2>EDUCATION</h2>
-      <p><span class="job-company">Illinois Institute of Technology</span>, Chicago, IL <span class="job-date">MAY 2026</span></p>
-      <p>Bachelor of Science, Computer Science | Master of Cybersecurity (Coterminal)</p>
-      <ul>
-        <li>Relevant Courses (BS): Data Structures and Algorithms, Software Development, Operating Systems.</li>
-        <li>Relevant Courses (MS): Information Security, Ethical Hacking, Cryptography.</li>
-      </ul>
-    </div>
+    <main>
+      <section class="identity">
+        <div class="kicker">FAHD KHAN // SOFTWARE DEV // CYBERSECURITY</div>
+        <h1>initializing<br />portfolio</h1>
+        <p class="subtitle">
+          Lightweight GitHub Pages boot screen. Main portfolio runs on Vercel.
+          Press Enter to open the full build.
+        </p>
+      </section>
 
-    <div class="section">
-      <h2>SKILLS</h2>
-      <ul>
-        <li><strong>Programming Languages:</strong> Python | Java | C | SQL | Swift | Lua | C++ | HTML | CSS | JavaScript</li>
-        <li><strong>Game Development:</strong> Unity | Roblox Studio | Game Mechanics | UI/UX | Monetization Strategies</li>
-        <li><strong>Marketing & Content Creation:</strong> LinkedIn Ads | Instagram Marketing | Brand Development</li>
-        <li><strong>Technology & Tools:</strong> Git | Linux | Kali Linux | Davinci Resolve | Adobe Photoshop | Krita | MS & Google Suite</li>
-      </ul>
-    </div>
+      <section class="terminal" id="terminal" aria-live="polite"></section>
 
-    <div class="section">
-      <h2>WORK EXPERIENCE</h2>
-      <p><span class="job-title">Finance Intern</span> <span class="job-date">MAR 2024 – JUN 2024</span></p>
-      <p><span class="job-company">Open Avenues, Remote</span></p>
-      <ul>
-        <li>Drafted and posted targeted advertisements for companies tailored to their goals and boosting engagement by assessing audience trends.</li>
-        <li>Developed python scripts to analyze financial trends and represent data visually, enabling efficient data optimized decision-making.</li>
-      </ul>
+      <div class="actions">
+        <button id="enterBtn" type="button">Enter Portfolio ↵</button>
+        <a class="button" href="https://github.com/fkpanni" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="button" href="https://www.linkedin.com/in/fkpanni/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <span class="hint">Keyboard: press Enter</span>
+      </div>
 
-      <p><span class="job-title">Full-Stack Software Developer</span> <span class="job-date">JUN 2022 – PRESENT</span></p>
-      <p><span class="job-company">Freelance, Remote</span></p>
-      <ul>
-        <li>Designed and implemented software tools tailored for specific user needs for startups and small businesses.</li>
-        <li>Managed multiple projects from planning to launch, utilizing Python, Java, and HTML to create efficient, secure, and user-friendly applications tailored to client needs.</li>
-      </ul>
-    </div>
+      <div class="footer">
+        <span>fkpanni.github.io</span>
+        <span>status: <span class="ok">ready</span></span>
+      </div>
+    </main>
+  </section>
 
-    <div class="section">
-      <h2>PROJECT EXPERIENCE</h2>
-      <p><strong>Telescope Image Processing & Genetic Algorithm development (Swift)</strong></p>
-      <ul>
-        <li>Developing an image alignment application using genetic algorithms and optimizing alignment through iterative transformations.</li>
-        <li>Improving UX/UI design, modularized code, and integrated telescope metadata to enhance functionality and alignment accuracy.</li>
-        <li>Interacting with Apple's macOS interface systems to streamline user interactions and optimize file management operations.</li>
-      </ul>
+  <script>
+    const PORTFOLIO_URL = "https://YOUR-PORTFOLIO-URL.vercel.app";
 
-      <p><strong>Roblox Game Development (Lua, C++)</strong></p>
-      <ul>
-        <li>Designing and creating a full-scale Roblox game from scratch, including gameplay mechanics, character modeling, UI systems and monetization features.</li>
-        <li>Developed game projects such as obstacle courses, applying Lua scripting and game design principles to manipulate pre-defined objects and elevate player engagement.</li>
-      </ul>
+    const terminal = document.getElementById("terminal");
+    const enterBtn = document.getElementById("enterBtn");
 
-      <p><strong>Rotten Tomatoes Movie Database (Python, SQL)</strong></p>
-      <ul>
-        <li>Generated a movie database application scraping data from Rotten Tomatoes, using Python libraries to clean and format extracted data. Implemented SQL queries to reform trends and comparisons among data.</li>
-      </ul>
+    const lines = [
+      ["$ boot fahd.os", 220],
+      ["loading identity modules...", 360],
+      ["✓ software development", 220],
+      ["✓ cybersecurity", 220],
+      ["✓ game-dev experiments", 220],
+      ["✓ UI systems", 220],
+      ["mounting project archive...", 320],
+      ["connecting to Vercel deployment...", 420],
+      ["portfolio route resolved.", 260],
+      ["", 100],
+      ["Press ENTER to continue →", 0]
+    ];
 
-      <p><strong>Keepa API Discord Bot (Python, Discord API, Keepa API)</strong></p>
-      <ul>
-        <li>Built a discord bot to integrate with Keepa API, allowing users to track Amazon product prices directly from discord set alerts. Implemented various features allowing for optimal user experience and smooth performance to handle multiple user requests simultaneously.</li>
-      </ul>
-    </div>
+    let lineIndex = 0;
 
-    <div class="section">
-      <h2>EXTRACURRICULARS</h2>
-      <p><strong>Secretary and Marketing Executive</strong></p>
-      <p><span class="job-company">Creative Club, Illinois Institute of Technology</span></p>
-      <ul>
-        <li>Devised marketing strategies to promote club activities and engagement, projected to triple club membership.</li>
-        <li>Produced digital content, including flyers, logos, and social media posts, boosting the club's online presence.</li>
-        <li>Managed club meetings, organized events, and advance community-building initiatives.</li>
-      </ul>
-    </div>
+    function appendLine(text = "") {
+      const line = document.createElement("div");
+      line.className = "line";
 
+      if (text.startsWith("$")) {
+        line.innerHTML = `<span class="prompt">${text}</span>`;
+      } else if (text.startsWith("✓")) {
+        line.innerHTML = `<span class="ok">${text}</span>`;
+      } else if (text.includes("ENTER")) {
+        line.innerHTML = `<span class="muted">${text}</span><span class="cursor"></span>`;
+      } else {
+        line.textContent = text;
+      }
+
+      terminal.appendChild(line);
+    }
+
+    function typeBoot() {
+      if (lineIndex >= lines.length) return;
+
+      const [text, delay] = lines[lineIndex];
+      appendLine(text);
+      lineIndex += 1;
+
+      setTimeout(typeBoot, delay);
+    }
+
+    function openPortfolio() {
+      if (PORTFOLIO_URL.includes("YOUR-PORTFOLIO-URL")) {
+        alert("Replace PORTFOLIO_URL in index.html with your real Vercel link first.");
+        return;
+      }
+
+      window.location.href = PORTFOLIO_URL;
+    }
+
+    enterBtn.addEventListener("click", openPortfolio);
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        openPortfolio();
+      }
+    });
+
+    typeBoot();
+  </script>
 </body>
 </html>
