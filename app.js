@@ -1,6 +1,6 @@
-const TERMINAL_WIDTH = 660;
-const TERMINAL_HEIGHT = 480;
-const VIEWPORT_PADDING = 28;
+const TERMINAL_WIDTH = 700;
+const TERMINAL_HEIGHT = 540;
+const VIEWPORT_PADDING = 24;
 
 const terminal = document.getElementById("terminal");
 const bootScreen = document.getElementById("bootScreen");
@@ -31,12 +31,6 @@ let activeIndex = 0;
 let bootFinished = false;
 let animationFrameId = null;
 
-/*
-  Keep the terminal at one fixed internal size.
-
-  On smaller screens, the complete terminal is scaled down
-  proportionally instead of rearranging into a different layout.
-*/
 function scaleTerminal() {
   const availableWidth =
     window.innerWidth - VIEWPORT_PADDING * 2;
@@ -47,13 +41,9 @@ function scaleTerminal() {
   const widthScale = availableWidth / TERMINAL_WIDTH;
   const heightScale = availableHeight / TERMINAL_HEIGHT;
 
-  const scale = Math.min(
-    widthScale,
-    heightScale,
-    1
-  );
+  const scale = Math.min(widthScale, heightScale, 1);
 
-  terminal.style.transform = `scale(${Math.max(scale, 0.35)})`;
+  terminal.style.transform = `scale(${Math.max(scale, 0.32)})`;
 }
 
 function setProgress(value) {
@@ -71,9 +61,7 @@ function setProgress(value) {
 function completeLog(index) {
   const status = logRows[index]?.querySelector("span:last-child");
 
-  if (!status) {
-    return;
-  }
+  if (!status) return;
 
   status.textContent = "OK";
   status.classList.remove("pending");
@@ -104,32 +92,27 @@ function updateBootState(progress) {
 }
 
 function finishBoot() {
-  if (bootFinished) {
-    return;
-  }
+  if (bootFinished) return;
 
   bootFinished = true;
 
   setProgress(100);
   updateBootState(100);
 
-  window.setTimeout(
-    () => {
-      bootScreen.classList.add("hidden");
-      bootScreen.setAttribute("aria-hidden", "true");
+  window.setTimeout(() => {
+    bootScreen.classList.add("hidden");
+    bootScreen.setAttribute("aria-hidden", "true");
 
-      destinationScreen.classList.add("visible");
-      destinationScreen.setAttribute("aria-hidden", "false");
+    destinationScreen.classList.add("visible");
+    destinationScreen.setAttribute("aria-hidden", "false");
 
-      terminal.classList.add("boot-ready");
+    terminal.classList.add("boot-ready");
 
-      footerHint.textContent =
-        "tip: ↑/↓ navigate · enter open · tap select";
+    footerHint.textContent =
+      "tip: ↑/↓ navigate · enter open · tap select";
 
-      updateActiveDestination(0);
-    },
-    prefersReducedMotion ? 0 : 350
-  );
+    updateActiveDestination(0);
+  }, prefersReducedMotion ? 0 : 350);
 }
 
 function runBootAnimation() {
@@ -144,13 +127,7 @@ function runBootAnimation() {
   function animate(currentTime) {
     const elapsed = currentTime - startTime;
     const rawProgress = Math.min(elapsed / duration, 1);
-
-    /*
-      Slight easing while retaining a system-loading feel.
-    */
-    const easedProgress =
-      1 - Math.pow(1 - rawProgress, 2.2);
-
+    const easedProgress = 1 - Math.pow(1 - rawProgress, 2.2);
     const percentage = easedProgress * 100;
 
     setProgress(percentage);
@@ -168,9 +145,7 @@ function runBootAnimation() {
 }
 
 function skipBoot() {
-  if (bootFinished) {
-    return;
-  }
+  if (bootFinished) return;
 
   if (animationFrameId) {
     cancelAnimationFrame(animationFrameId);
@@ -180,9 +155,7 @@ function skipBoot() {
 }
 
 function updateActiveDestination(index) {
-  if (!bootFinished) {
-    return;
-  }
+  if (!bootFinished) return;
 
   activeIndex =
     (index + destinations.length) % destinations.length;
@@ -200,11 +173,7 @@ function updateActiveDestination(index) {
 
 function openActiveDestination() {
   const destination = destinations[activeIndex];
-
-  if (!destination) {
-    return;
-  }
-
+  if (!destination) return;
   destination.click();
 }
 
@@ -218,7 +187,6 @@ function handleKeyboard(event) {
       event.preventDefault();
       skipBoot();
     }
-
     return;
   }
 
