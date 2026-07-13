@@ -8,617 +8,176 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   />
 
-  <title>Fahd Khan // Portfolio Boot</title>
+  <title>Fahd Khan // Launch Hub</title>
 
   <meta
     name="description"
-    content="Fahd Khan developer portfolio launch page."
+    content="Fahd Khan's portfolio, GitHub, and LinkedIn launch hub."
   />
 
-  <style>
-    :root {
-      --bg: #050607;
-      --panel: rgba(13, 17, 18, 0.92);
-      --text: #e8fff1;
-      --muted: #7c8f86;
-      --green: #72ff9f;
-      --green-soft: rgba(114, 255, 159, 0.18);
-      --border: rgba(114, 255, 159, 0.25);
-      --danger: #ff6b6b;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      min-height: 100%;
-      background: var(--bg);
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100svh;
-      background:
-        radial-gradient(
-          circle at 25% 20%,
-          rgba(114, 255, 159, 0.08),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 80% 70%,
-          rgba(114, 255, 159, 0.05),
-          transparent 30%
-        ),
-        var(--bg);
-      color: var(--text);
-      font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        monospace;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .shell {
-      width: min(900px, 100%);
-      border: 1px solid var(--border);
-      background: var(--panel);
-      box-shadow:
-        0 0 40px rgba(114, 255, 159, 0.08),
-        inset 0 0 30px rgba(114, 255, 159, 0.03);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 42px;
-      padding: 0 16px;
-      border-bottom: 1px solid rgba(114, 255, 159, 0.15);
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .dot {
-      width: 11px;
-      height: 11px;
-      flex: 0 0 auto;
-      border-radius: 999px;
-      background: var(--muted);
-      opacity: 0.8;
-    }
-
-    .dot:nth-child(1) {
-      background: #ff5f56;
-    }
-
-    .dot:nth-child(2) {
-      background: #ffbd2e;
-    }
-
-    .dot:nth-child(3) {
-      background: #27c93f;
-    }
-
-    .title {
-      min-width: 0;
-      margin-left: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    main {
-      padding: clamp(22px, 4vw, 44px);
-    }
-
-    .identity {
-      margin-bottom: 28px;
-    }
-
-    .kicker {
-      margin-bottom: 10px;
-      color: var(--green);
-      font-size: 14px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(34px, 7vw, 72px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      font-weight: 800;
-    }
-
-    .subtitle {
-      max-width: 650px;
-      margin-top: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .terminal {
-      min-height: 250px;
-      margin-top: 30px;
-      padding: 22px;
-      border: 1px solid rgba(114, 255, 159, 0.18);
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.32);
-    }
-
-    .line {
-      min-height: 24px;
-      color: var(--text);
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    .prompt,
-    .ok {
-      color: var(--green);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 9px;
-      height: 1.1em;
-      margin-left: 3px;
-      background: var(--green);
-      transform: translateY(3px);
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    button,
-    a.button {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--green-soft);
-      color: var(--text);
-      padding: 12px 16px;
-      font: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      transition:
-        transform 160ms ease,
-        border-color 160ms ease,
-        background 160ms ease;
-    }
-
-    button:hover,
-    a.button:hover {
-      transform: translateY(-1px);
-      border-color: var(--green);
-      background: rgba(114, 255, 159, 0.24);
-    }
-
-    button:focus-visible,
-    a.button:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 3px;
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 34px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(114, 255, 159, 0.12);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer a {
-      color: var(--green);
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Mobile and tablet */
-    @media (max-width: 700px) {
-      body {
-        display: block;
-        min-height: 100vh;
-        min-height: 100svh;
-        min-height: 100dvh;
-        padding: 0;
-        background:
-          radial-gradient(
-            circle at 50% 8%,
-            rgba(114, 255, 159, 0.08),
-            transparent 34%
-          ),
-          var(--bg);
-      }
-
-      .shell {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        min-height: 100vh;
-        min-height: 100svh;
-        min-height: 100dvh;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-      }
-
-      .topbar {
-        flex: 0 0 auto;
-        height: calc(44px + env(safe-area-inset-top));
-        padding-top: env(safe-area-inset-top);
-        padding-left: max(16px, env(safe-area-inset-left));
-        padding-right: max(16px, env(safe-area-inset-right));
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-      }
-
-      .title {
-        margin-left: 6px;
-        font-size: 11px;
-      }
-
-      main {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding-top: 24px;
-        padding-right: max(20px, env(safe-area-inset-right));
-        padding-bottom: max(20px, env(safe-area-inset-bottom));
-        padding-left: max(20px, env(safe-area-inset-left));
-      }
-
-      .identity {
-        margin-bottom: 22px;
-      }
-
-      .kicker {
-        margin-bottom: 12px;
-        font-size: 11px;
-        line-height: 1.5;
-        letter-spacing: 0.03em;
-      }
-
-      h1 {
-        font-size: clamp(42px, 13vw, 64px);
-        line-height: 0.92;
-        letter-spacing: -0.065em;
-      }
-
-      .subtitle {
-        margin-top: 18px;
-        font-size: 14px;
-        line-height: 1.7;
-      }
-
-      .terminal {
-        min-height: 0;
-        margin-top: 24px;
-        padding: 18px 16px;
-        border-radius: 12px;
-      }
-
-      .line {
-        min-height: 22px;
-        font-size: clamp(12px, 3.5vw, 14px);
-        line-height: 1.55;
-      }
-
-      .actions {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        align-items: stretch;
-        gap: 10px;
-        margin-top: 22px;
-      }
-
-      #enterBtn {
-        grid-column: 1 / -1;
-      }
-
-      button,
-      a.button {
-        width: 100%;
-        min-height: 48px;
-        padding: 12px 10px;
-        text-align: center;
-        touch-action: manipulation;
-      }
-
-      .hint {
-        grid-column: 1 / -1;
-        margin-top: 2px;
-        font-size: 11px;
-      }
-
-      .footer {
-        margin-top: auto;
-        padding-top: 18px;
-        font-size: 11px;
-      }
-    }
-
-    /* Very narrow phones */
-    @media (max-width: 380px) {
-      main {
-        padding-right: max(16px, env(safe-area-inset-right));
-        padding-left: max(16px, env(safe-area-inset-left));
-      }
-
-      h1 {
-        font-size: 40px;
-      }
-
-      .terminal {
-        padding-right: 14px;
-        padding-left: 14px;
-      }
-
-      .actions {
-        grid-template-columns: 1fr;
-      }
-
-      #enterBtn,
-      .hint {
-        grid-column: auto;
-      }
-
-      .footer {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    /* Landscape phones */
-    @media (max-height: 560px) and (orientation: landscape) {
-      .shell {
-        min-height: 100dvh;
-      }
-
-      main {
-        padding-top: 18px;
-        padding-bottom: max(18px, env(safe-area-inset-bottom));
-      }
-
-      .identity {
-        margin-bottom: 16px;
-      }
-
-      h1 {
-        font-size: 42px;
-      }
-
-      .subtitle {
-        margin-top: 10px;
-      }
-
-      .terminal {
-        min-height: 0;
-        margin-top: 16px;
-      }
-
-      .footer {
-        margin-top: 24px;
-      }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <section class="shell" aria-label="Portfolio launch terminal">
-    <div class="topbar">
-      <span class="dot" aria-hidden="true"></span>
-      <span class="dot" aria-hidden="true"></span>
-      <span class="dot" aria-hidden="true"></span>
+  <main class="viewport">
+    <section
+      class="terminal"
+      id="terminal"
+      aria-label="Fahd Khan launch hub"
+    >
+      <div class="terminal-glow" aria-hidden="true"></div>
+      <div class="scanlines" aria-hidden="true"></div>
 
-      <span class="title">
-        fahd@github-pages: ~/portfolio-launch
-      </span>
-    </div>
-
-    <main>
-      <section class="identity">
-        <div class="kicker">
-          FAHD KHAN // SOFTWARE DEV // CYBERSECURITY
+      <header class="terminal-header">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
 
-        <h1>
-          initializing<br />
-          portfolio
-        </h1>
+        <div class="system-line">
+          <span class="status-dot" aria-hidden="true"></span>
 
-        <p class="subtitle">
-          Lightweight GitHub Pages boot screen. Main portfolio runs on Vercel.
-          Press Enter to open the full build.
-        </p>
+          <span class="system-name">
+            system.boot
+          </span>
+
+          <span class="system-separator">//</span>
+
+          <span class="system-status" id="systemStatus">
+            initializing launch hub
+          </span>
+        </div>
+
+        <div class="menu-glyph" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+      </header>
+
+      <section class="identity">
+        <h1>Fahd Khan</h1>
+        <p>software dev // cybersecurity</p>
       </section>
 
-      <section
-        class="terminal"
-        id="terminal"
-        aria-live="polite"
-        aria-label="Portfolio boot sequence"
-      ></section>
+      <div class="divider" aria-hidden="true"></div>
 
-      <div class="actions">
-        <button id="enterBtn" type="button">
-          Enter Portfolio ↵
-        </button>
-
-        <a
-          class="button"
-          href="https://github.com/fkpanni"
-          target="_blank"
-          rel="noreferrer"
+      <section class="screen-area">
+        <!-- Boot sequence -->
+        <div
+          class="boot-screen"
+          id="bootScreen"
+          aria-live="polite"
         >
-          GitHub
-        </a>
+          <p class="terminal-prompt">
+            <span>›</span>
+            <span id="bootMessage">initializing system...</span>
+          </p>
 
-        <a
-          class="button"
-          href="https://www.linkedin.com/in/fkpanni/"
-          target="_blank"
-          rel="noreferrer"
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Launch hub initialization"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="progressTrack"
+          >
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="progress-meta">
+            <span id="progressLabel">loading identity modules</span>
+            <span id="progressValue">0%</span>
+          </div>
+
+          <div class="boot-log" id="bootLog">
+            <div>
+              <span>identity.modules</span>
+              <span class="pending">WAIT</span>
+            </div>
+
+            <div>
+              <span>destination.routes</span>
+              <span class="pending">WAIT</span>
+            </div>
+
+            <div>
+              <span>interface.controls</span>
+              <span class="pending">WAIT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Link selection -->
+        <div
+          class="destination-screen"
+          id="destinationScreen"
+          aria-hidden="true"
         >
-          LinkedIn
-        </a>
+          <p class="terminal-prompt destination-prompt">
+            <span>›</span>
+            select destination or enter a command...
+          </p>
 
-        <span class="hint">
-          Keyboard: press Enter
-        </span>
-      </div>
+          <nav class="destination-list" aria-label="Destinations">
+            <a
+              class="destination active"
+              href="https://fkpanni.vercel.app"
+              data-index="0"
+            >
+              <span class="destination-icon" aria-hidden="true">→</span>
 
-      <div class="footer">
+              <span class="destination-name">Portfolio</span>
+
+              <span class="destination-key">[1]</span>
+            </a>
+
+            <a
+              class="destination"
+              href="https://github.com/fkpanni"
+              target="_blank"
+              rel="noreferrer"
+              data-index="1"
+            >
+              <span class="destination-icon code-icon" aria-hidden="true">
+                &lt;/&gt;
+              </span>
+
+              <span class="destination-name">GitHub</span>
+
+              <span class="destination-key">[2]</span>
+            </a>
+
+            <a
+              class="destination"
+              href="https://www.linkedin.com/in/fkpanni/"
+              target="_blank"
+              rel="noreferrer"
+              data-index="2"
+            >
+              <span class="destination-icon linkedin-icon" aria-hidden="true">
+                in
+              </span>
+
+              <span class="destination-name">LinkedIn</span>
+
+              <span class="destination-key">[3]</span>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <footer class="terminal-footer">
         <span>fkpanni.github.io</span>
 
-        <span>
-          status:
-          <span class="ok">ready</span>
+        <span id="footerHint">
+          loading system...
         </span>
-      </div>
-    </main>
-  </section>
+      </footer>
+    </section>
+  </main>
 
-  <script>
-    const PORTFOLIO_URL = "https://fkpanni.vercel.app";
-
-    const terminal = document.getElementById("terminal");
-    const enterBtn = document.getElementById("enterBtn");
-
-    const lines = [
-      ["$ boot fahd.os", 220],
-      ["loading identity modules...", 360],
-      ["✓ software development", 220],
-      ["✓ cybersecurity", 220],
-      ["✓ game-dev experiments", 220],
-      ["✓ UI systems", 220],
-      ["mounting project archive...", 320],
-      ["connecting to Vercel deployment...", 420],
-      ["portfolio route resolved.", 260],
-      ["", 100],
-      ["Press ENTER to continue →", 0]
-    ];
-
-    let lineIndex = 0;
-
-    function appendLine(text = "") {
-      const line = document.createElement("div");
-      line.className = "line";
-
-      if (text.startsWith("$")) {
-        line.innerHTML = `<span class="prompt">${text}</span>`;
-      } else if (text.startsWith("✓")) {
-        line.innerHTML = `<span class="ok">${text}</span>`;
-      } else if (text.includes("ENTER")) {
-        line.innerHTML = `
-          <span class="muted">${text}</span>
-          <span class="cursor" aria-hidden="true"></span>
-        `;
-      } else {
-        line.textContent = text;
-      }
-
-      terminal.appendChild(line);
-    }
-
-    function typeBoot() {
-      if (lineIndex >= lines.length) {
-        return;
-      }
-
-      const [text, delay] = lines[lineIndex];
-
-      appendLine(text);
-      lineIndex += 1;
-
-      window.setTimeout(typeBoot, delay);
-    }
-
-    function openPortfolio() {
-      if (PORTFOLIO_URL.includes("YOUR-PORTFOLIO-URL")) {
-        window.alert(
-          "Replace PORTFOLIO_URL in index.html with your real Vercel link first."
-        );
-
-        return;
-      }
-
-      window.location.href = PORTFOLIO_URL;
-    }
-
-    enterBtn.addEventListener("click", openPortfolio);
-
-    window.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter") {
-        return;
-      }
-
-      const activeElement = document.activeElement;
-      const isInteractiveElement =
-        activeElement instanceof HTMLAnchorElement ||
-        activeElement instanceof HTMLButtonElement;
-
-      if (!isInteractiveElement) {
-        openPortfolio();
-      }
-    });
-
-    typeBoot();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
